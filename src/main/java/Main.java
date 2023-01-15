@@ -6,13 +6,11 @@ public class Main {
 
     public static void main(String[] args) {
 
-        try {
-            Scanner scanner = new Scanner(new File("liczby.txt"));
+        try (Scanner scanner = new Scanner(new File("liczby.txt"))) {
             Map<Integer, Integer> numbers = new TreeMap<>();
 
-            int next;
-
             while (scanner.hasNextLine()) {
+                int next;
                 next = scanner.nextInt();
                 if (numbers.containsKey(next)) {
                     numbers.put(next, numbers.get(next) + 1);
@@ -20,7 +18,6 @@ public class Main {
                     numbers.put(next, 1);
                 }
             }
-
             Set<Map.Entry<Integer, Integer>> entries = numbers.entrySet();
             for (Map.Entry<Integer, Integer> entry : entries) {
                 System.out.println(entry.getKey() + " - liczba wystąpień " + entry.getValue());
